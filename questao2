@@ -1,0 +1,26 @@
+function pertenceFibonacci(numero) {
+  let a = 0, b = 1;
+  
+  // Verificando se o número 0 ou 1 são passados
+  if (numero === 0 || numero === 1) {
+    return true;
+  }
+  
+  // Calculando a sequência até encontrar ou ultrapassar o número
+  while (b < numero) {
+    let temp = b;
+    b = a + b;
+    a = temp;
+  }
+  
+  // Verifica se o número informado é um número da sequência
+  return b === numero;
+}
+
+// Exemplo de uso
+const numeroInformado = 21; // Substitua com o número desejado
+if (pertenceFibonacci(numeroInformado)) {
+  console.log(`${numeroInformado} pertence à sequência de Fibonacci.`);
+} else {
+  console.log(`${numeroInformado} não pertence à sequência de Fibonacci.`);
+}

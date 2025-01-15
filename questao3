@@ -1,0 +1,57 @@
+const dadosFaturamento = {
+  "faturamento": [
+    {"dia": 1, "valor": 200},
+    {"dia": 2, "valor": 0},
+    {"dia": 3, "valor": 450},
+    {"dia": 4, "valor": 700},
+    {"dia": 5, "valor": 100},
+    {"dia": 6, "valor": 0},
+    {"dia": 7, "valor": 300},
+    {"dia": 8, "valor": 500},
+    {"dia": 9, "valor": 0},
+    {"dia": 10, "valor": 600}
+  ]
+};
+
+function calcularFaturamento(dados) {
+  let totalFaturamento = 0;
+  let diasComFaturamento = 0;
+  let menorFaturamento = Infinity;
+  let maiorFaturamento = -Infinity;
+  
+  // Percorre os dados de faturamento para calcular os valores necessários
+  dados.faturamento.forEach(dia => {
+    if (dia.valor > 0) { // Ignora dias sem faturamento
+      totalFaturamento += dia.valor;
+      diasComFaturamento++;
+      if (dia.valor < menorFaturamento) menorFaturamento = dia.valor;
+      if (dia.valor > maiorFaturamento) maiorFaturamento = dia.valor;
+    }
+  });
+
+  // Calculando a média de faturamento
+  const mediaFaturamento = totalFaturamento / diasComFaturamento;
+
+  // Contando os dias com faturamento superior à média
+  let diasAcimaDaMedia = 0;
+  dados.faturamento.forEach(dia => {
+    if (dia.valor > mediaFaturamento) {
+      diasAcimaDaMedia++;
+    }
+  });
+
+  return {
+    menorFaturamento,
+    maiorFaturamento,
+    mediaFaturamento,
+    diasAcimaDaMedia
+  };
+}
+
+// Exibindo os resultados
+const resultado = calcularFaturamento(dadosFaturamento);
+
+console.log(`Menor faturamento: ${resultado.menorFaturamento}`);
+console.log(`Maior faturamento: ${resultado.maiorFaturamento}`);
+console.log(`Média de faturamento: ${resultado.mediaFaturamento.toFixed(2)}`);
+console.log(`Número de dias com faturamento superior à média: ${resultado.diasAcimaDaMedia}`);
